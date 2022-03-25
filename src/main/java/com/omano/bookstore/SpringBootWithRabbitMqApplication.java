@@ -18,41 +18,7 @@ public class SpringBootWithRabbitMqApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootWithRabbitMqApplication.class, args);
-
-		Book book = new Book(1L, "Ngangula", "Pepetela", 120.0);
-		System.out.println(book.toString());
+        System.out.println("The RabbitMQ Producer Application is Running ...");
 	}
-
-
-	@Value("${spring.rabbitmq.host}")
-    String host;
-
-    @Value("${spring.rabbitmq.username}")
-    String username;
-	
-    @Value("${spring.rabbitmq.password}")
-    String password;
-
-	@Bean
-    CachingConnectionFactory connectionFactory() {
-
-        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host);
-        cachingConnectionFactory.setUsername(username);
-        cachingConnectionFactory.setPassword(password);
-        return cachingConnectionFactory;
-    }
-
-    @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
-
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-		
-        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jsonMessageConverter());
-        return rabbitTemplate;
-    }
 
 }

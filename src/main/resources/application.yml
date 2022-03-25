@@ -2,6 +2,7 @@
 
 app:
   message: Message has been sent successfully.
+  name: RabbitMQ Producer Application
 spring:
   rabbitmq:
     host: localhost
